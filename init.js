@@ -1,0 +1,1 @@
+echo console.log("hello"); > index.js
