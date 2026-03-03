@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>advance functions</title>
+</head>
+<body>
+
+    <button class="js-button">click</button>
+     
+    
+
+    <script>
+
+        setTimeout(function(){
+            console.log('after 3 seconds');
+        }, 3000);
+
+
+        // let autoId;
+
+        // function example(){
+        //     if (autoId){
+        //         clearInterval(autoId);
+        //         autoId = null
+        //         return;
+        //     } /* the first round dosen't have autoId */
+        // }
+        //     autoId = setInterval(()=> {
+        //     console.log('after every 3 seconds');
+        // }, 3000);
+
+
+        ['milk', 'cow', 'white'].forEach(function(value, index){
+            console.log(value, index)
+        })
+
+        const oneLine = () => 2+3;
+        console.log(oneLine())
+
+        obj = {
+            sortHand_method(){
+                let checking = 2+5
+            }
+        };
+
+        function testing() {
+            console.log('click1')
+        }
+
+        document.querySelector('.js-button').addEventListener('click', testing)
+
+        document.querySelector('.js-button').removeEventListener('click', testing)
+        
+        document.querySelector('.js-button').addEventListener('click', ()=> {
+            console.log('click2')
+        })
+
+        const array = [0, 1, -5];
+
+        const notNegitive = array.filter((value, index)=> {return value >= 0;})
+        const multiply = array.map((value, index)=> { return value * 2})
+        const multi = array.map(n => n * 2)
+
+        console.log(notNegitive)
+        console.log(multiply)
+        console.log(multi)
+
+
+
+    </script>
+</body>
+</html>

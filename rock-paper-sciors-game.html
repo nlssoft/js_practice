@@ -8,21 +8,47 @@
     <body>
     <div>
         <div class="heading-js">Pick your choice</div>
-        <button class="rock-button" onclick="play('rock')">Rock</button>
-        <button class="paper-button" onclick="play('paper')">Paper</button>
-        <button class="scissors-button" onclick="play('scissors')">Scissors</button>
+        <button class="rock-button" >Rock</button>
+        <button class="paper-button" >Paper</button>
+        <button class="scissors-button" >Scissors</button>
 
         <div class="result-js"></div>
         <div class="score-js"></div>
         <br>
         <br>
         <button class="reset-button" onclick="resetScore()">Reset Score</button>
-
+        <button class="js-auto", onclick="inter()">Auto Play</button>
     </div>
 
 
 
     <script>
+
+        document.querySelector('.rock-button').addEventListener('click', ()=> {
+            play('rock')
+        })
+
+        document.querySelector('.paper-button').addEventListener('click', ()=> {
+            play('paper')
+        })
+
+        document.querySelector('.rock-button').addEventListener('click', ()=> {
+            play('scissors')
+        })
+
+        document.body.addEventListener('keydown', (event)=> {
+            if (event.key === 'r'){
+                play('rock')
+
+            } else if (event.key === 'p'){
+                play('paper') 
+
+            } else if (event.key === 's'){
+                play('scissors')
+
+            }}
+        )
+
 
         function updatedisplay(){
             document.querySelector('.score-js').innerText = `Wins: ${score.win} Loss: ${score.loss}  Draw: ${score.dwar}`
@@ -34,6 +60,8 @@
                 loss : 0,
                 dwar : 0,
             };
+            localStorage.setItem('score', JSON.stringify(score));
+            document.querySelector('.result-js').innerHTML = '';
             updatedisplay()
 
         }
@@ -112,6 +140,19 @@
             localStorage.setItem('score', JSON.stringify(score));
             document.querySelector('.result-js').innerText = `${outcome}`;
             updatedisplay()
+        }
+
+        let autoId;
+
+        function inter(){
+            if (autoId){
+                clearInterval(autoId);
+                autoId = null;
+                return;
+            }
+
+            autoId = setInterval(()=> {play(computerchoice())},
+            1000);
         }
 
         updatedisplay()
