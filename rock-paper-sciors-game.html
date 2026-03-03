@@ -1,0 +1,122 @@
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fun Game</title>
+    </head>
+    <body>
+    <div>
+        <div class="heading-js">Pick your choice</div>
+        <button class="rock-button" onclick="play('rock')">Rock</button>
+        <button class="paper-button" onclick="play('paper')">Paper</button>
+        <button class="scissors-button" onclick="play('scissors')">Scissors</button>
+
+        <div class="result-js"></div>
+        <div class="score-js"></div>
+        <br>
+        <br>
+        <button class="reset-button" onclick="resetScore()">Reset Score</button>
+
+    </div>
+
+
+
+    <script>
+
+        function updatedisplay(){
+            document.querySelector('.score-js').innerText = `Wins: ${score.win} Loss: ${score.loss}  Draw: ${score.dwar}`
+        }
+
+        function resetScore(){
+            score = {
+                win : 0,
+                loss : 0,
+                dwar : 0,
+            };
+            updatedisplay()
+
+        }
+
+        let score = JSON.parse(localStorage.getItem("score"));
+        if (!score){
+            resetScore()
+        }
+
+        function computerchoice(){
+            let choice = "";
+            const random = Math.random();
+
+            if (random < 1/3){
+                choice = 'paper';
+
+                } else if (random < 2/3){
+                    choice = 'rock';
+
+                } else {
+                    choice = 'scissors';
+            }
+
+            return choice;
+
+        }
+
+        function play(userChoice){
+            let outcome = ''
+            const computer = computerchoice();
+
+            if (userChoice === 'rock'){
+                if (computer === "rock"){
+                    outcome = 'Dwar';
+                    score.dwar++;
+
+                } else if (computer === "paper"){
+                    outcome = 'You Loss';
+                    score.loss++;
+
+                }else {
+                    outcome = 'You Win';
+                    score.win++;
+                }
+
+            } else if (userChoice === 'paper'){
+
+                if (computer === "rock"){
+                    outcome = 'You Win';
+                    score.win++;
+
+                    } else if (computer === "paper"){
+                        outcome = 'Dwar';
+                        score.dwar++;
+
+                    }else {
+                        outcome = 'You Loss';
+                        score.loss++;
+                    }
+            } else if (userChoice === 'scissors'){
+
+                if (computer === "rock"){
+                    outcome = 'You Loss';
+                    score.loss++;
+
+                    } else if (computer === "paper"){
+                        outcome = 'You Win';
+                        score.win++;
+
+                    }else {
+                        outcome = 'Dwar';
+                        score.dwar++;
+                    }
+            }
+
+            localStorage.setItem('score', JSON.stringify(score));
+            document.querySelector('.result-js').innerText = `${outcome}`;
+            updatedisplay()
+        }
+
+        updatedisplay()
+
+    </script>
+
+    </body>
+    </html>
